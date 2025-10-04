@@ -20,5 +20,5 @@ def create_item(item: str):
 def get_item(item_id: int):
     if item_id < len(items):
         return items[item_id]
-    raise HTTPException(status_code=404, detail="Item not found")
+    raise HTTPException(status_code=404, detail=f"Item {item_id} not found")
 
