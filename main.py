@@ -18,12 +18,12 @@ def create_item(item: Item):
     return item
 
 
-@app.get("/items")
+@app.get("/items", response_model=list[Item])
 def list_items(limit: int = 10):
     return items[:limit]
 
 
-@app.get("/items/{item_id}")
+@app.get("/items/{item_id}", response_model=Item)
 def get_item(item_id: int) -> Item:
     if item_id < len(items):
         return items[item_id]
