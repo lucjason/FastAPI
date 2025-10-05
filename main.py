@@ -1,5 +1,7 @@
 from fastapi import FastAPI, HTTPException
 
+from schemas import Item
+
 app = FastAPI()
 
 items = []
@@ -11,7 +13,7 @@ def root():
 
 
 @app.post("/items")
-def create_item(item: str):
+def create_item(item: Item):
     items.append(item)
     return item
 
@@ -22,7 +24,7 @@ def list_items(limit: int = 10):
 
 
 @app.get("/items/{item_id}")
-def get_item(item_id: int):
+def get_item(item_id: int) -> Item:
     if item_id < len(items):
         return items[item_id]
     raise HTTPException(status_code=404, detail=f"Item {item_id} not found")
